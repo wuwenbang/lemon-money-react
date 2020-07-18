@@ -6,7 +6,7 @@ import Icon from "./Icon";
 // require("icons/money.svg");
 // require("icons/tag.svg");
 // require("icons/statistics.svg");
-const color = "#61bafb"
+const themeColor = "#61bafb"
 const NavWrapper = styled.nav`
   line-height: 1.2;
   box-shadow: 0 0 3px rgba(0,0,0,0.25);
@@ -28,8 +28,8 @@ const NavWrapper = styled.nav`
           height:32px;
         }
         &.selected{
-            color:${color};
-            fill:${color};
+            color:${themeColor};
+            fill:${themeColor};
         }
       } 
     }
