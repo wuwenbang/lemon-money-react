@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import React from "react";
 import { Link } from "react-router-dom";
-//require 可以防止 Tree Shaking
-require("icons/money.svg");
-require("icons/tag.svg");
-require("icons/statistics.svg");
+import Icon from "./Icon";
+// require 可以防止 Tree Shaking
+// require("icons/money.svg");
+// require("icons/tag.svg");
+// require("icons/statistics.svg");
 
 const NavWrapper = styled.nav`
   line-height: 1.2;
@@ -34,22 +35,16 @@ const Nav = () => {
         <NavWrapper>
             <ul>
                 <li>
-                    <svg className="icon">
-                        <use xlinkHref="#tag"></use>
-                    </svg>
-                    <Link to="/tags">标签页</Link>
+                    <Icon name="tag" />
+                    <Link to="/tags">标签</Link>
                 </li>
                 <li>
-                    <svg className="icon">
-                        <use xlinkHref="#money"></use>
-                    </svg>
-                    <Link to="/money">记账页</Link>
+                    <Icon name="money" />
+                    <Link to="/money">记账</Link>
                 </li>
                 <li>
-                    <svg className="icon">
-                        <use xlinkHref="#statistics"></use>
-                    </svg>
-                    <Link to="/statistics">统计页</Link>
+                    <Icon name="statistics" />
+                    <Link to="/statistics">统计</Link>
                 </li>
             </ul>
         </NavWrapper>
