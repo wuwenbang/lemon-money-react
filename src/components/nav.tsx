@@ -6,7 +6,7 @@ import Icon from "./Icon";
 // require("icons/money.svg");
 // require("icons/tag.svg");
 // require("icons/statistics.svg");
-const themeColor = "#61bafb"
+const themeColor = "#61bafb";
 const NavWrapper = styled.nav`
   line-height: 1.2;
   box-shadow: 0 0 3px rgba(0,0,0,0.25);

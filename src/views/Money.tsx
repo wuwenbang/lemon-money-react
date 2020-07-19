@@ -16,15 +16,7 @@ const MyLayout = styled(Layout)`
 function Money() {
     return (
         <MyLayout>
-            <TagsSection>
-                <ol>
-                    <li>通用</li>
-                    <li>饮食</li>
-                    <li>交通</li>
-                    <li>住宿</li>
-                </ol>
-                <button>新建标签</button>
-            </TagsSection>
+            <TagsSection />
             <NotesSection >
                 <label>
                     <span>备注</span>

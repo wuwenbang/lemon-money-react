@@ -21,3 +21,14 @@ body {
     height: 1em;
     width: 1em;
 }
+.clearfix::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+input,
+button,
+select,
+textarea {
+    outline: none;
+}
