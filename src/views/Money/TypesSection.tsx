@@ -1,10 +1,28 @@
 import styled from "styled-components";
+import React, { useState } from "react";
 
-const TypesSection = styled.section`
+const TypesSection: React.FC = () => {
+    const [type, setType] = useState('-');
+    const [typeList] = useState<('-' | '+')[]>(['-', '+']);
+    const typeMap = { '-': '支出', '+': "收入" }
+    return (
+        <Wrapper>
+            <ul>
+                {typeList.map(t => <li
+                    key={t}
+                    className={type === t ? 'selected' : ''}
+                    onClick={() => setType(t)}
+                >{typeMap[t]}</li>)}
+            </ul>
+        </Wrapper>
+    )
+}
+
+const Wrapper = styled.section`
     font-size: 24px;
     > ul{
         display:flex;
-        background:#c4c4c4;
+        background:#e4e4e4;
         > li {
             width: 50%; 
             text-align:center;
@@ -13,8 +31,8 @@ const TypesSection = styled.section`
             &.selected::after{
                 content: '';
                 display:block; 
-                height: 3px;
-                background:#333;
+                height: 5px;
+                background:#61bafb;
                 position:absolute;
                 bottom:0;
                 width: 100%;

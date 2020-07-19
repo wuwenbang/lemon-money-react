@@ -17,18 +17,8 @@ function Money() {
     return (
         <MyLayout>
             <TagsSection />
-            <NotesSection >
-                <label>
-                    <span>备注</span>
-                    <input type="text" placeholder="在这里添加备注" />
-                </label>
-            </NotesSection>
-            <TypesSection >
-                <ul>
-                    <li className="selected">支出</li>
-                    <li>收入</li>
-                </ul>
-            </TypesSection>
+            <NotesSection />
+            <TypesSection />
             <NumberPadSection>
                 <div className="output">100</div>
                 <div className="pad clearfix">
