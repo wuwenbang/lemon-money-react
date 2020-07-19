@@ -1,8 +1,10 @@
 import styled from "styled-components";
 import React, { useState } from "react";
-
-const TypesSection: React.FC = () => {
-    const [type, setType] = useState('-');
+type Type = {
+    value: '+' | '-',
+    onChange: (value: '+' | '-') => void
+}
+const TypesSection: React.FC<Type> = (props) => {
     const [typeList] = useState<('-' | '+')[]>(['-', '+']);
     const typeMap = { '-': '支出', '+': "收入" }
     return (
@@ -10,8 +12,8 @@ const TypesSection: React.FC = () => {
             <ul>
                 {typeList.map(t => <li
                     key={t}
-                    className={type === t ? 'selected' : ''}
-                    onClick={() => setType(t)}
+                    className={props.value === t ? 'selected' : ''}
+                    onClick={() => props.onChange(t)}
                 >{typeMap[t]}</li>)}
             </ul>
         </Wrapper>

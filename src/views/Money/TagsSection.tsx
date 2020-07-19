@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 import React, { useState } from 'react';
-
-const TagsSection: React.FC = () => {
+type Props = {
+  value: string[],
+  onChange: (value: string[]) => void
+}
+const TagsSection: React.FC<Props> = (props) => {
   const [tags, setTags] = useState<string[]>(["通用", "饮食", "交通", "住宿"]);
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const onAddTag = () => {
     const newTag = window.prompt("请输入标签名：");
     if (newTag) {
@@ -11,14 +13,14 @@ const TagsSection: React.FC = () => {
     }
   }
   const onToggleTag = (tag: string) => {
-    if (selectedTags.indexOf(tag) >= 0) {
-      setSelectedTags(selectedTags.filter(t => t !== tag));
+    if (props.value.indexOf(tag) >= 0) {
+      props.onChange(props.value.filter(t => t !== tag));
     } else {
-      setSelectedTags([...selectedTags, tag])
+      props.onChange([...props.value, tag])
     }
   }
   const setClass = (tag: string) => {
-    return selectedTags.indexOf(tag) >= 0 ? 'selected' : '';
+    return props.value.indexOf(tag) >= 0 ? 'selected' : '';
   }
   return (
     <Wrapper>

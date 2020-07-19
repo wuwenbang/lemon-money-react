@@ -1,11 +1,15 @@
 import styled from "styled-components";
-import React, { useState } from "react";
-
-const NumberPadSection = () => {
-  const [output, _setOutput] = useState('0');
+import React from "react";
+type Output = {
+  value: number
+  onChange: (value: number) => void
+  onOkay?: (value: number) => void
+}
+const NumberPadSection: React.FC<Output> = (props) => {
+  const output = props.value.toString();
   const setOutput = (output: string) => {
     if (output.length <= 16) {
-      _setOutput(output);
+      props.onChange(parseFloat(output));
     }
   }
   const onClickHandler = (e: React.MouseEvent) => {
