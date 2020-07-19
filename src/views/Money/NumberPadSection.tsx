@@ -2,7 +2,12 @@ import styled from "styled-components";
 import React, { useState } from "react";
 
 const NumberPadSection = () => {
-  const [output, setOutput] = useState('0');
+  const [output, _setOutput] = useState('0');
+  const setOutput = (output: string) => {
+    if (output.length <= 16) {
+      _setOutput(output);
+    }
+  }
   const onClickHandler = (e: React.MouseEvent) => {
     const text = (e.target as HTMLButtonElement).textContent;
     switch (text) {
@@ -16,24 +21,30 @@ const NumberPadSection = () => {
       case '7':
       case '8':
       case '9':
-      case '.':
-        if (text === '0' || (output === '0' && text !== '.')) {
+        if (output === '0') {
           setOutput(text);
-        } else if (text === '.') {
-          if (output.indexOf('.') === -1) {
-            setOutput(output + text);
-          }
-        }
-        else {
+        } else {
           setOutput(output + text);
         }
-
         break;
+      case '.':
+        if (output.indexOf('.') === -1) {
+          setOutput(output + text);
+        }
+        break;
+
       case '清空':
+        setOutput('0');
         break;
       case '删除':
+        if (output.length === 1) {
+          setOutput('0');
+        } else {
+          setOutput(output.slice(0, -1));
+        }
         break;
       case 'OK':
+        setOutput('0');
         break;
     }
   }
@@ -64,6 +75,7 @@ const Wrapper = styled.section`
   display:flex;
   flex-direction: column;
   > .output{
+    font-family: Consolas,monospace;
     background:white;
     font-size: 36px;
     line-height: 72px;
