@@ -32,3 +32,9 @@ select,
 textarea {
     outline: none;
 }
+
+.oneLine {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

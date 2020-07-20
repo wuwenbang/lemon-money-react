@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import React, { useState } from "react";
+import themeColor from "global";
 type Type = {
     value: '+' | '-',
     onChange: (value: '+' | '-') => void
@@ -34,7 +35,7 @@ const Wrapper = styled.section`
                 content: '';
                 display:block; 
                 height: 5px;
-                background:#61bafb;
+                background:${themeColor};
                 position:absolute;
                 bottom:0;
                 width: 100%;

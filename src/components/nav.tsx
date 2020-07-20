@@ -2,11 +2,12 @@ import styled from "styled-components";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import Icon from "./Icon";
+import themeColor from "global";
 // require 可以防止 Tree Shaking
 // require("icons/money.svg");
 // require("icons/tag.svg");
 // require("icons/statistics.svg");
-const themeColor = "#61bafb";
+
 const NavWrapper = styled.nav`
   line-height: 1.2;
   box-shadow: 0 0 3px rgba(0,0,0,0.25);
