@@ -44,14 +44,14 @@ const Center = styled.div`
 `
 
 function Tags() {
-    const { tags, setTags } = useTags();
+    const { tags } = useTags();
     return (
         <Layout>
             <TagList>
                 {tags.map(tag =>
-                    <li key={tag}>
-                        <Link to={'/tags/' + tag}>
-                            {tag} <Icon name="right" />
+                    <li key={tag.id}>
+                        <Link to={'/tags/' + tag.id}>
+                            {tag.name} <Icon name="right" />
                         </Link>
                     </li>
                 )}

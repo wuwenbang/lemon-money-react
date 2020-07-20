@@ -1,36 +1,37 @@
 import styled from 'styled-components';
 import React from 'react';
 import useTags from 'useTags';
+import createId from '../../lib/createId';
 type Props = {
-  value: string[],
-  onChange: (value: string[]) => void
+  value: number[],
+  onChange: (value: number[]) => void
 }
 const TagsSection: React.FC<Props> = (props) => {
   const { tags, setTags } = useTags();
   const onAddTag = () => {
-    const newTag = window.prompt("请输入标签名：");
-    if (newTag) {
-      setTags([...tags, newTag])
+    const newTagName = window.prompt("请输入标签名：");
+    if (newTagName) {
+      setTags([...tags, { id: createId(), name: newTagName }])
     }
   }
-  const onToggleTag = (tag: string) => {
-    if (props.value.indexOf(tag) >= 0) {
-      props.onChange(props.value.filter(t => t !== tag));
+  const onToggleTag = (tagId: number) => {
+    if (props.value.indexOf(tagId) >= 0) {
+      props.onChange(props.value.filter(t => t !== tagId));
     } else {
-      props.onChange([...props.value, tag])
+      props.onChange([...props.value, tagId])
     }
   }
-  const setClass = (tag: string) => {
-    return props.value.indexOf(tag) >= 0 ? 'selected' : '';
+  const setClass = (tagId: number) => {
+    return props.value.indexOf(tagId) >= 0 ? 'selected' : '';
   }
   return (
     <Wrapper>
       <ol>
         {tags.map(tag => <li
-          key={tag}
-          onClick={() => onToggleTag(tag)}
-          className={setClass(tag)}>
-          {tag}</li>)}
+          key={tag.id}
+          onClick={() => onToggleTag(tag.id)}
+          className={setClass(tag.id)}>
+          {tag.name}</li>)}
       </ol>
       <button onClick={onAddTag}>新建标签</button>
     </Wrapper>
