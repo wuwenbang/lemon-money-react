@@ -6,15 +6,19 @@ type Tag = {
     name: string
 }
 
+const defaultTags = [
+    { id: createId(), name: "通用" },
+    { id: createId(), name: "饮食" },
+    { id: createId(), name: "交通" },
+    { id: createId(), name: "住宿" }
+]
 // 封装一个自定义hook
 const useTags = () => {
-    const [tags, setTags] = useState<Tag[]>([
-        { id: createId(), name: "通用" },
-        { id: createId(), name: "饮食" },
-        { id: createId(), name: "交通" },
-        { id: createId(), name: "住宿" }
-    ]);
-    return { tags, setTags }
+    const [tags, setTags] = useState<Tag[]>(defaultTags);
+    const findTag = (id: number) => {
+        return tags.filter(t => t.id === id)[0]
+    }
+    return { tags, setTags, findTag }
 }
 
 export default useTags;

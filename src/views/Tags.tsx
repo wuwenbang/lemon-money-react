@@ -3,8 +3,29 @@ import Layout from 'components/Layout';
 import useTags from 'useTags';
 import styled from 'styled-components';
 import Icon from '../components/Icon';
-import themeColor from 'global';
+import themeColor from 'lib/global';
 import { Link } from 'react-router-dom';
+
+
+function Tags() {
+    const { tags } = useTags();
+    return (
+        <Layout>
+            <TagList>
+                {tags.map(tag =>
+                    <li key={tag.id}>
+                        <Link to={'/tags/' + tag.id}>
+                            {tag.name} <Icon name="right" />
+                        </Link>
+                    </li>
+                )}
+            </TagList>
+            <Center>
+                <Button>新建标签</Button>
+            </Center>
+        </Layout>
+    );
+}
 
 const TagList = styled.ol`
     font-size:16px;
@@ -43,24 +64,5 @@ const Center = styled.div`
 
 `
 
-function Tags() {
-    const { tags } = useTags();
-    return (
-        <Layout>
-            <TagList>
-                {tags.map(tag =>
-                    <li key={tag.id}>
-                        <Link to={'/tags/' + tag.id}>
-                            {tag.name} <Icon name="right" />
-                        </Link>
-                    </li>
-                )}
-            </TagList>
-            <Center>
-                <Button>新建标签</Button>
-            </Center>
-        </Layout>
-    );
-}
 
 export default Tags;

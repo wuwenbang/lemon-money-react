@@ -2,7 +2,7 @@ import styled from "styled-components";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import Icon from "./Icon";
-import themeColor from "global";
+import themeColor from "lib/global";
 // require 可以防止 Tree Shaking
 // require("icons/money.svg");
 // require("icons/tag.svg");

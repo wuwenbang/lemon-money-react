@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React, { useState } from "react";
-import themeColor from "global";
+import themeColor from "lib/global";
 type Type = {
     value: '+' | '-',
     onChange: (value: '+' | '-') => void
