@@ -18,14 +18,12 @@ function Money() {
         tags: [] as string[],
         note: '',
         type: '-' as Type,
-        amount: 0
+        amount: '0'
     });
+    // Partial 部分类型
     const onChange = (obj: Partial<typeof selected>) => {
-        setSelected({
-            ...selected,
-            ...obj
-        })
-    }
+        setSelected({ ...selected, ...obj })
+    };
     return (
         <MyLayout>
             <TagsSection value={selected.tags}

@@ -1,11 +1,12 @@
 import styled from 'styled-components';
-import React, { useState } from 'react';
+import React from 'react';
+import useTags from 'useTags';
 type Props = {
   value: string[],
   onChange: (value: string[]) => void
 }
 const TagsSection: React.FC<Props> = (props) => {
-  const [tags, setTags] = useState<string[]>(["通用", "饮食", "交通", "住宿"]);
+  const { tags, setTags } = useTags();
   const onAddTag = () => {
     const newTag = window.prompt("请输入标签名：");
     if (newTag) {
