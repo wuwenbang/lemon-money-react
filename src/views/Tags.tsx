@@ -3,8 +3,8 @@ import Layout from 'components/Layout';
 import useTags from 'useTags';
 import styled from 'styled-components';
 import Icon from '../components/Icon';
-import themeColor from 'lib/global';
 import { Link } from 'react-router-dom';
+import Button from 'components/Button';
 
 
 function Tags() {
@@ -46,15 +46,6 @@ const TagList = styled.ol`
         } 
     }
 `;
-
-const Button = styled.button`
-    font-size:16px;
-    border:none;
-    padding:10px 16px;
-    border-radius:4px;
-    color: white;
-    background:${themeColor};
-`
 
 const Center = styled.div`
     padding-top:32px;

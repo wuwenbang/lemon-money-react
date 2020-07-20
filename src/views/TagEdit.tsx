@@ -1,6 +1,7 @@
 import React from "react"
 import useTags from 'useTags';
 import { useParams } from "react-router-dom";
+import Layout from '../components/Layout';
 type Params = {
     id: string
 }
@@ -9,7 +10,9 @@ const TagEdit: React.FC = () => {
     let { id } = useParams<Params>();   //获取路由上的ID
     const tag = findTag(parseInt(id));
     return (
-        <div>{tag.name}</div>
+        <Layout>
+            <div>{tag.name}</div>
+        </Layout>
     )
 }
 
