@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Icon from '../components/Icon';
 import { Link } from 'react-router-dom';
 import Button from 'components/Button';
+import Center from 'components/Center';
 
 
 function Tags() {
@@ -47,13 +48,7 @@ const TagList = styled.ol`
     }
 `;
 
-const Center = styled.div`
-    padding-top:32px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
 
-`
 
 
 export default Tags;

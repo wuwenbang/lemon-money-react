@@ -4,13 +4,18 @@ import React from "react";
 const Label = styled.label`
     display:flex;
     align-items: center;
-    > span { margin-right: 16px; white-space: nowrap; }
+    > span { 
+        margin-right: 16px; 
+        white-space: nowrap; 
+    }
     > input {
-      display:block;
-      width: 100%;
-      height: 72px;
-      background: none;
-      border: none;
+        display:block;
+        width: 100%;
+        line-height:48px;
+        background: none;
+        border: none;
+        color:#333; 
+
     }
 `
 type Props = {

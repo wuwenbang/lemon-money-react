@@ -5,11 +5,13 @@ import Layout from '../components/Layout';
 import styled from 'styled-components';
 import Icon from "components/Icon";
 import Button from "components/Button";
+import Input from "components/Input";
+import Center from 'components/Center';
 type Params = {
     id: string
 }
 const TagEdit: React.FC = () => {
-    const { findTag } = useTags();
+    const { findTag, updateTag } = useTags();
     let { id } = useParams<Params>();   //获取路由上的ID
     const tag = findTag(parseInt(id));
     return (
@@ -19,15 +21,13 @@ const TagEdit: React.FC = () => {
                 <span>编辑标签</span>
                 <Icon name=""></Icon>
             </TopBar>
-            <main>
-                <label>
-                    <span>标签名</span>
-                    <input type="text"></input>
-                </label>
-            </main>
-            <div>
-                <Button>删除标签</Button>
-            </div>
+            <InputWrapper>
+                <Input label="标签名" type="text" placeholder="标签名" value={tag.name}
+                    onChange={(e) => { updateTag(tag.id, { name: e.target.value }) }} />
+            </InputWrapper>
+            <Center>
+                <DeleteButton>删除标签</DeleteButton>
+            </Center>
         </Layout>
     )
 }
@@ -39,6 +39,13 @@ const TopBar = styled.header`
     background:white;
     line-height:20px;
     padding:14px;
+`;
+const InputWrapper = styled.main`
+    background:white;
+    margin-top:12px;
+    padding: 0 16px;
+`;
+const DeleteButton = styled(Button)`
+    background:#f30;
 `
-
 export default TagEdit;
