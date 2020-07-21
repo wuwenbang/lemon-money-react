@@ -11,7 +11,7 @@ type Params = {
     id: string
 }
 const TagEdit: React.FC = () => {
-    const { findTag, updateTag } = useTags();
+    const { findTag, updateTag, deleteTag } = useTags();
     let { id } = useParams<Params>();   //获取路由上的ID
     const tag = findTag(parseInt(id));
     return (
@@ -26,7 +26,7 @@ const TagEdit: React.FC = () => {
                     onChange={(e) => { updateTag(tag.id, { name: e.target.value }) }} />
             </InputWrapper>
             <Center>
-                <DeleteButton>删除标签</DeleteButton>
+                <DeleteButton onClick={() => { deleteTag(tag.id) }}>删除标签</DeleteButton>
             </Center>
         </Layout>
     )
