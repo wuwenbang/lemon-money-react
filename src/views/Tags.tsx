@@ -9,7 +9,7 @@ import Center from 'components/Center';
 
 
 function Tags() {
-    const { tags } = useTags();
+    const { tags, createTag } = useTags();
     return (
         <Layout>
             <TagList>
@@ -22,7 +22,7 @@ function Tags() {
                 )}
             </TagList>
             <Center>
-                <Button>新建标签</Button>
+                <Button onClick={createTag}>新建标签</Button>
             </Center>
         </Layout>
     );

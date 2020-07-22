@@ -1,19 +1,13 @@
 import styled from 'styled-components';
 import React from 'react';
 import useTags from 'useTags';
-import createId from '../../lib/createId';
 type Props = {
   value: number[],
   onChange: (value: number[]) => void
 }
 const TagsSection: React.FC<Props> = (props) => {
-  const { tags, setTags } = useTags();
-  const onAddTag = () => {
-    const newTagName = window.prompt("请输入标签名：");
-    if (newTagName) {
-      setTags([...tags, { id: createId(), name: newTagName }])
-    }
-  }
+  const { tags, createTag } = useTags();
+
   const onToggleTag = (tagId: number) => {
     if (props.value.indexOf(tagId) >= 0) {
       props.onChange(props.value.filter(t => t !== tagId));
@@ -33,7 +27,7 @@ const TagsSection: React.FC<Props> = (props) => {
           className={setClass(tag.id)}>
           {tag.name}</li>)}
       </ol>
-      <button onClick={onAddTag}>新建标签</button>
+      <button onClick={createTag}>新建标签</button>
     </Wrapper>
   )
 }

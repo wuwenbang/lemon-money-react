@@ -1,20 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import createId from "lib/createId";
+import useUpdate from './hooks/useUpdate';
 
 type Tag = {
     id: number
     name: string
 }
 
-const defaultTags = [
-    { id: createId(), name: "通用" },
-    { id: createId(), name: "饮食" },
-    { id: createId(), name: "交通" },
-    { id: createId(), name: "住宿" }
-]
 // 封装一个自定义hook
 const useTags = () => {
-    const [tags, setTags] = useState<Tag[]>(defaultTags);
+    const [tags, setTags] = useState<Tag[]>([]);
+    useEffect(() => {
+        let localTags = JSON.parse(window.localStorage.getItem('tags') || '[]');
+        if (localTags.length === 0) {
+            localTags = [
+                { id: createId(), name: "通用" },
+                { id: createId(), name: "饮食" },
+                { id: createId(), name: "交通" },
+                { id: createId(), name: "住宿" }
+            ]
+        }
+        setTags(localTags);
+    }, []);
+    useUpdate(() => {
+        window.localStorage.setItem('tags', JSON.stringify(tags))
+    }, [tags])
     const findTag = (id: number) => {
         return tags.filter(t => t.id === id)[0]
     }
@@ -31,22 +41,18 @@ const useTags = () => {
     // vue: 可以直接修改数据
     // React: 不可变数据
     const updateTag = (id: number, obj: { name: string }) => {
-        // 获取索引
-        const index = findTagIndex(id);
-        // 深拷贝 tags 得到 tagsClone
-        const tagsClone = JSON.parse(JSON.stringify(tags));
-        // 把 tagsClone 的第 index项 替换成 { id: id, name: obj.name }
-        tagsClone.splice(index, 1, { id: id, name: obj.name });
-        // 将 tagsClone 赋值 tags
-        setTags(tagsClone);
+        setTags(tags.map(tag => tag.id === id ? { id, name: obj.name } : tag));
     }
     const deleteTag = (id: number) => {
-        const index = findTagIndex(id);
-        const tagsClone = JSON.parse(JSON.stringify(tags));
-        tagsClone.splice(index, 1);
-        setTags(tagsClone);
+        setTags(tags.filter(tag => tag.id !== id));
     }
-    return { tags, setTags, findTag, findTagIndex, updateTag, deleteTag }
+    const createTag = () => {
+        const newTagName = window.prompt("请输入标签名：");
+        if (newTagName) {
+            setTags([...tags, { id: createId(), name: newTagName }])
+        }
+    }
+    return { tags, setTags, findTag, findTagIndex, updateTag, deleteTag, createTag }
 }
 
 export default useTags;
