@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import createId from "lib/createId";
-import useUpdate from './hooks/useUpdate';
+import useUpdate from './useUpdate';
 
 type Tag = {
     id: number

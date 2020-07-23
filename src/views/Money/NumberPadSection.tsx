@@ -1,15 +1,17 @@
 import styled from "styled-components";
 import React from "react";
+import { useState } from 'react';
 type Output = {
-  value: string
-  onChange: (value: string) => void
-  onOkay?: (value: string) => void
+  value: number
+  onChange: (value: number) => void
+  onOkay: () => void
 }
 const NumberPadSection: React.FC<Output> = (props) => {
-  const output = props.value;
-  const setOutput = (output: string) => {
+  const [output, setOutput] = useState(props.value.toString())
+  const updateOutput = (output: string) => {
     if (output.length <= 16) {
-      props.onChange(output);
+      setOutput(output);
+      props.onChange(parseFloat(output));
     }
   }
   const onClickHandler = (e: React.MouseEvent) => {
@@ -26,29 +28,32 @@ const NumberPadSection: React.FC<Output> = (props) => {
       case '8':
       case '9':
         if (output === '0') {
-          setOutput(text);
+          updateOutput(text);
         } else {
-          setOutput(output + text);
+          updateOutput(output + text);
         }
         break;
       case '.':
         if (output.indexOf('.') === -1) {
-          setOutput(output + text);
+          updateOutput(output + text);
         }
         break;
 
       case '清空':
-        setOutput('0');
+        updateOutput('0');
         break;
       case '删除':
         if (output.length === 1) {
-          setOutput('0');
+          updateOutput('0');
         } else {
-          setOutput(output.slice(0, -1));
+          updateOutput(output.slice(0, -1));
         }
         break;
       case 'OK':
-        setOutput('0');
+        if (props.onOkay) {
+          props.onOkay();
+          updateOutput('0');
+        }
         break;
     }
   }

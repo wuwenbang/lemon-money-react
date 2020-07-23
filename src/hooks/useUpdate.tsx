@@ -6,6 +6,7 @@ const useUpdate = (fn: () => void, deps: any[]) => {
         count.current += 1;
     });
     useEffect(() => {
+        //避免第一次渲染时执行fn
         if (count.current > 1) {
             fn();
         }
