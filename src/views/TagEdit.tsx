@@ -12,28 +12,37 @@ type Params = {
 }
 const TagEdit: React.FC = () => {
     const { findTag, updateTag, deleteTag } = useTags();
-    let { id } = useParams<Params>();   //获取路由上的ID
-    const tag = findTag(parseInt(id));
+    let { id: idString } = useParams<Params>();   //获取路由上的ID
+    const tag = findTag(parseInt(idString));
     const history = useHistory();
     const onClickBack = () => {
         history.goBack();
     }
-    return (
-        <Layout>
-            <TopBar>
-                <Icon name="left" onClick={onClickBack}></Icon>
-                <span>编辑标签</span>
-                <Icon name=""></Icon>
-            </TopBar>
-            <InputWrapper>
-                <Input label="标签名" type="text" placeholder="标签名" value={tag.name}
-                    onChange={(e) => { updateTag(tag.id, { name: e.target.value }) }} />
-            </InputWrapper>
-            <Center>
-                <DeleteButton onClick={() => { deleteTag(tag.id) }}>删除标签</DeleteButton>
-            </Center>
-        </Layout>
-    )
+    const onDeleteTag = () => {
+        deleteTag(tag.id);
+        history.goBack();
+    }
+    if (tag) {
+        return (
+            <Layout>
+                <TopBar>
+                    <Icon name="left" onClick={onClickBack}></Icon>
+                    <span>编辑标签</span>
+                    <Icon name=""></Icon>
+                </TopBar>
+                <InputWrapper>
+                    <Input label="标签名" type="text" placeholder="标签名" value={tag.name}
+                        onChange={(e) => { updateTag(tag.id, { name: e.target.value }) }} />
+                </InputWrapper>
+                <Center>
+                    <DeleteButton onClick={onDeleteTag}>删除标签</DeleteButton>
+                </Center>
+            </Layout>
+        )
+    } else {
+        return (<Center>tag不存在</Center>)
+    }
+
 }
 
 const TopBar = styled.header`

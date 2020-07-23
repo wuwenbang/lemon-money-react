@@ -2,21 +2,18 @@ import styled from 'styled-components';
 import React from 'react';
 import useTags from 'hooks/useTags';
 type Props = {
-  value: number[],
-  onChange: (value: number[]) => void
+  value: number,
+  onChange: (value: number) => void
 }
 const TagsSection: React.FC<Props> = (props) => {
   const { tags, createTag } = useTags();
 
   const onToggleTag = (tagId: number) => {
-    if (props.value.indexOf(tagId) >= 0) {
-      props.onChange(props.value.filter(t => t !== tagId));
-    } else {
-      props.onChange([...props.value, tagId])
-    }
+    props.onChange(tagId)
   }
+
   const setClass = (tagId: number) => {
-    return props.value.indexOf(tagId) >= 0 ? 'selected' : '';
+    return tagId === props.value ? 'selected' : '';
   }
   return (
     <Wrapper>

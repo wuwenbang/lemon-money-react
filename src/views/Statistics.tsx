@@ -10,7 +10,7 @@ import { RecordItem, useRecords } from '../hooks/useRecords';
 function Statistics() {
     const [type, setType] = useState<'-' | '+'>('-');
     const { records } = useRecords();
-    const { getTagName } = useTags();
+    const { tags, getTagName } = useTags();
     const hash: { [key: string]: RecordItem[] } = {}
     const selectedRecords = records.filter(r => r.type === type);
     selectedRecords.map(r => {
@@ -27,26 +27,30 @@ function Statistics() {
         if (a[0] > b[0]) return -1;
         return 0;
     })
-    return (
-        <Layout>
-            <TypesWrapper>
-                <TypesSection value={type}
-                    onChange={value => setType(value)} />
-            </TypesWrapper>
-            {array.map(([date, records]) => <div key={date}>
-                <Date>{date}</Date>
-                {records.map(r => {
-                    return (<Item key={r.time}>
-                        <div className="tags oneLine">{r.tagIds.map(id => <span key={id}>{getTagName(id)}</span>)}</div>
-                        <div className="note">{r.note}</div>
-                        <div className="amount">￥{r.amount}</div>
-                        {/* <span>{day(r.time).format('YYYY年MM月DD日')}</span> */}
-                    </Item>)
-                })}
-            </div>)}
+    if (tags) {
+        return (
+            <Layout>
+                <TypesWrapper>
+                    <TypesSection value={type}
+                        onChange={value => setType(value)} />
+                </TypesWrapper>
+                {array.map(([date, records]) => <div key={date}>
+                    <Date>{date}</Date>
+                    {records.map(r => {
+                        return (<Item key={r.time}>
+                            <div className="tags oneLine">{getTagName(r.tagId)}</div>
+                            <div className="note">{r.note}</div>
+                            <div className="amount">￥{r.amount}</div>
+                            {/* <span>{day(r.time).format('YYYY年MM月DD日')}</span> */}
+                        </Item>)
+                    })}
+                </div>)}
+            </Layout>
+        );
+    } else {
+        return (<div>tags不存在</div>)
+    }
 
-        </Layout>
-    );
 }
 
 const Date = styled.div`

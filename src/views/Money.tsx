@@ -15,7 +15,7 @@ const MyLayout = styled(Layout)`
 type Type = '+' | '-';
 
 const defaultRecords = {
-    tagIds: [1] as number[],
+    tagId: 1,
     note: '',
     type: '-' as Type,
     amount: 0
@@ -35,8 +35,8 @@ function Money() {
     }
     return (
         <MyLayout>
-            <TagsSection value={selected.tagIds}
-                onChange={(tagIds) => onChange({ tagIds: tagIds })} />
+            <TagsSection value={selected.tagId}
+                onChange={(tagId) => onChange({ tagId: tagId })} />
             <NoteSection value={selected.note}
                 onChange={(note) => onChange({ note: note })} />
             <TypesWrapper>

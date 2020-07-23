@@ -4,7 +4,7 @@ import useUpdate from './useUpdate';
 
 
 type NewRecordItem = {
-    tagIds: number[]
+    tagId: number
     note: string
     type: '+' | '-'
     amount: number

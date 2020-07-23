@@ -8,7 +8,6 @@ import TagEdit from './views/TagEdit';
 
 const App = function App() {
   return (
-    // exact 精确匹配
     <Router>
       <Switch>
         <Route exact path="/tags">
