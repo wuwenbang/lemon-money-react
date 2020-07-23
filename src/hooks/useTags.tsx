@@ -24,7 +24,7 @@ const useTags = () => {
     }, []);
     useUpdate(() => {
         window.localStorage.setItem('tags', JSON.stringify(tags))
-    }, [tags])
+    }, tags)
     const findTag = (id: number) => {
         return tags.filter(t => t.id === id)[0]
     }
@@ -52,7 +52,10 @@ const useTags = () => {
             setTags([...tags, { id: createId(), name: newTagName }])
         }
     }
-    return { tags, setTags, findTag, findTagIndex, updateTag, deleteTag, createTag }
+    const getTagName = (id: number) => {
+        return tags.filter(tag => tag.id === id)[0].name;
+    }
+    return { tags, setTags, findTag, findTagIndex, updateTag, deleteTag, createTag, getTagName }
 }
 
 export default useTags;

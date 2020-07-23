@@ -10,18 +10,18 @@ type NewRecordItem = {
     amount: number
 }
 
-type RecordItem = NewRecordItem & {
+export type RecordItem = NewRecordItem & {
     time: string
 }
 
-const useRecords = () => {
+export const useRecords = () => {
     const [records, setRecords] = useState<RecordItem[]>([])
     useEffect(() => {
         setRecords(JSON.parse(window.localStorage.getItem('records') || '[]'));
     }, [])
     useUpdate(() => {
         window.localStorage.setItem('records', JSON.stringify(records))
-    }, [records])
+    }, records)
     const createRecord = (newRecord: NewRecordItem) => {
         if (newRecord.amount <= 0) {
             window.alert("请输入金额")
@@ -33,5 +33,3 @@ const useRecords = () => {
     }
     return { records, createRecord };
 }
-
-export default useRecords;
