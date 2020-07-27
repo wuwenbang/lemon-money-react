@@ -7,6 +7,7 @@ import TypesSection from './Money/TypesSection';
 import NumberPadSection from './Money/NumberPadSection';
 import { useState } from 'react';
 import { useRecords } from '../hooks/useRecords';
+import useTags from 'hooks/useTags';
 
 const MyLayout = styled(Layout)`
   display:flex;
@@ -23,6 +24,10 @@ const defaultRecords = {
 
 function Money() {
     const { createRecord } = useRecords()
+    const { tags } = useTags();
+    if (tags[0]) {
+        defaultRecords.tagId = tags[0].id;
+    }
     const [selected, setSelected] = useState(defaultRecords);
     // Partial 部分类型
     const onChange = (obj: Partial<typeof selected>) => {

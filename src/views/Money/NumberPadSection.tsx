@@ -1,19 +1,24 @@
 import styled from "styled-components";
 import React from "react";
 import { useState } from 'react';
+
 type Output = {
   value: number
   onChange: (value: number) => void
   onOkay: () => void
 }
+
 const NumberPadSection: React.FC<Output> = (props) => {
+
   const [output, setOutput] = useState(props.value.toString())
+
   const updateOutput = (output: string) => {
     if (output.length <= 16) {
       setOutput(output);
       props.onChange(parseFloat(output));
     }
   }
+
   const onClickHandler = (e: React.MouseEvent) => {
     const text = (e.target as HTMLButtonElement).textContent;
     switch (text) {

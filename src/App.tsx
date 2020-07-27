@@ -1,5 +1,5 @@
 import { HashRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-import React from 'react';
+import React, { useEffect } from 'react';
 import Tags from "views/Tags";
 import Money from "views/Money";
 import Statistics from "views/Statistics";
@@ -7,6 +7,11 @@ import NoMatch from "views/NoMatch";
 import TagEdit from './views/TagEdit';
 
 const App = function App() {
+  useEffect(() => {
+    if (document.documentElement.clientWidth > 500) {
+      window.alert("请使用【手机】或者【开发者工具手机模式】预览网址")
+    }
+  }, [])
   return (
     <Router>
       <Switch>
