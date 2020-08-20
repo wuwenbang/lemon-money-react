@@ -58,6 +58,7 @@ const NumberPadSection: React.FC<Output> = (props) => {
         if (props.onOkay) {
           props.onOkay();
           updateOutput('0');
+          window.alert("记账成功");
         }
         break;
     }
