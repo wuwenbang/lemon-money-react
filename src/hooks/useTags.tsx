@@ -54,8 +54,10 @@ const useTags = () => {
         }
     }
     const getTagName = (id: number) => {
+        let tagItem
         if (id) {
-            return tags.filter(tag => tag.id === id)[0].name;
+            tagItem = tags.filter(tag => tag.id === id)[0]
+            return tagItem && tagItem.name;
         } else {
             return ''
         }
